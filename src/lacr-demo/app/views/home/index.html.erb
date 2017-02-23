@@ -5,42 +5,84 @@
   </header>
 <% end %>
 
-<div class="container">
+<div id="home-top-container">
+<div class="container" >
     <div class="jumbotron">
-      <div class="container">
-        <h1 class="display-3">Aberdeen Registers</h1>
-        <p>Aberdeen’s fifteenth-century town council registers illuminate the workings of this Scottish burgh in a way unsurpassed by other Scottish urban records of the era. They also demonstrate the interconnections of people and ideas across northern Europe in the age of the renaissance.</p>
+        <div class="row">
+          <div class="col-md-4">
+            <img src="/assets/lacr-round.jpg" width="90%" height="90%">
+          </div>
+          <div class="col-md-8">
+        <h1 class="display-3" id="h1-home-light-text">Aberdeen Registers</h1>
+        <p id="p-home-light-text">Aberdeen’s fifteenth-century town council registers illuminate the workings of this Scottish burgh in a way unsurpassed by other Scottish urban records of the era. They also demonstrate the interconnections of people and ideas across northern Europe in the age of the renaissance.</p>
       </div>
     </div>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<div id="home-middle">
+<div class="container" id="search-container">
+    <div class="row">
+      <div class="col-md-1">
+      </div>
+        <div class="col-md-11">  <form class="navbar-form navbar-left" id="search-home" action="/search" method="get">
+      <div class="input-group" id="search-home">
+        <input type="search" class="form-control" name="q" placeholder="Search for..." <% if @query %> value="<%= @query%>" <%end%>>
+        <div class="input-group-btn" >
+          <button class="btn btn-default" type="submit">
+            <i class="fa fa-search" aria-hidden="true"></i>
+          </button>
+        </div>
+      </div>
+      <input type="hidden" name="r" value="<%= @results_per_page%>">
+      <input type="hidden" name="m" value="<%= @misspellings%>">
+    </form>
+  </div>
+  </div>
+</div>
+</div>
+
+<hr>
 
     <div class="container-fluid" id="index-content">
 
       <div class="container-fluid">
-        <div class="row">
-          <div class="col-md-6">
-            <h2>View Images of the Original Documents</h2>
+        <div class="row justify-content-center">
+          <div class="col-md-1">
+          </div>
+          <div class="col-md-5">
+            <h2 class="h2-home">Images of the Original Documents</h2>
             <p>All of the original documents are available to view in stunning high resolution images that will allow for true appreciation of the source material. </p>
           </div>
-          <div class="col-md-6">
-            <h2>Read the entire Corpus</h2>
+          <div class="col-md-5">
+            <h2 class="h2-home">Read the entire Corpus</h2>
             <p>The transcribed text of the entire corpus of aberdeen burgh records will be made available giving access to these fascinating and world renowned documents  </p>
+         </div>
+         <div class="col-md-1">
          </div>
        </div>
      </div>
 
       <div class="container-fluid">
         <div class="row">
-          <div class="col-md-4">
-            <h2>Powerful search</h2>
+          <div class="col-md-1">
+          </div>
+          <div class="col-md-3">
+            <h2 class="h2-home">Powerful search</h2>
             <p>Our search has the capabilities will make finding exactly what you're looking for easy; Autocomplete, search suggestions and multiple advanced search fields all at lightning fast speeds.</p>
           </div>
           <div class="col-md-4">
-            <h2>Highly Contextual</h2>
+            <h2 class="h2-home">Highly Contextual</h2>
             <p>Relevant Contents of the documents will be displayed around the search term in order to give much greater context. Dates and document ID’s will also be displayed to further enhance this. </p>
          </div>
-          <div class="col-md-4">
-            <h2>Customized Search</h2>
+          <div class="col-md-3">
+            <h2 class="h2-home">Customized Search</h2>
             <p>A plethora of advanced search fields such as setting a start and end date, document by ID and the ability to search for proper names, aim to make search as concise as possible. </p>
+          </div>
+          <div class="col-md-1">
           </div>
         </div>
       </div>
