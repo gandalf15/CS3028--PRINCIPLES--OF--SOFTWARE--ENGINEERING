@@ -1,20 +1,175 @@
-<div class="container">
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+
+ <div class="container">
   <h1>Enter Query</h1>
   <%= render "xquery/search_form" %>
-  <h3>How do I use XQuery?</h3><br>
-  <a href="https://www.w3schools.com/xml/xquery_intro.asp" target="_blank">A helpful guide on XQuery provided by w3schools</a><br>
-  <a href="https://en.wikibooks.org/wiki/XQuery#Example_Scripts" target="_blank">Comprehensive examples provided by wikibooks</a>
 
-  <br>
-  <br>
+  <h1 align="center">Tags used within documents</h1>
+  <p align="center">To get started try using some of these tags in the examples below</p>
+
+ <div class="panel-group">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a data-toggle="collapse" href="#collapse5">Tags</a>
+      </h4>
+    </div>
+    <div id="collapse5" class="panel-collapse collapse">
+      <ul class="list-group">
+        <li class="list-group-item"><div class="container">
+  <div class="panel-group">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title">
+          <a data-toggle="collapse" href="#collapse1">Tag Catagory 1</a>
+        </h4>
+      </div>
+      <div id="collapse1" class="panel-collapse collapse">
+        <ul class="list-group">
+          <li class="list-group-item">Tag 1</li>
+          <li class="list-group-item">Tag 2</li>
+          <li class="list-group-item">Tag 3</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+    <div class="panel-group">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title">
+          <a data-toggle="collapse" href="#collapse2">Tag Catagory 2</a>
+        </h4>
+      </div>
+      <div id="collapse2" class="panel-collapse collapse">
+        <ul class="list-group">
+          <li class="list-group-item">Tag 1</li>
+          <li class="list-group-item">Tag 2</li>
+          <li class="list-group-item">Tag 3</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+    <div class="panel-group">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title">
+          <a data-toggle="collapse" href="#collapse3">Tag Catagory 3</a>
+        </h4>
+      </div>
+      <div id="collapse3" class="panel-collapse collapse">
+        <ul class="list-group">
+          <li class="list-group-item">Tag 1</li>
+          <li class="list-group-item">Tag 2</li>
+          <li class="list-group-item">Tag 3</li>
+          <li class="list-group-item">  <div class="panel-group">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title">
+          <a data-toggle="collapse" href="#collapse4">Tag Catagory 4</a>
+        </h4>
+      </div>
+      <div id="collapse4" class="panel-collapse collapse">
+        <ul class="list-group">
+          <li class="list-group-item">Tag 1</li>
+          <li class="list-group-item">Tag 2</li>
+          <li class="list-group-item">Tag 3</li>
+        </ul>
+      </div>
+    </div>
+  </div></li>
+        </ul>
+      </div>
+    </div>
+  </div></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+
+  <!-- End of table -->
+
+
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   <h1 align ="center">XQuery examples</h1>
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col-md-4">
-            <h2>Search for element</h2>
-
-            <p>XPath can be used to return all elements of with specific language</p>
+  <div class="container">
+  <div class="panel-group" id="accordion">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title">
+          <a data-toggle="collapse" data-parent="#accordion" href="#collapse5">Search for Element</a>
+        </h4>
+      </div>
+      <div id="collapse5" class="panel-collapse collapse">
+        <div class="panel-body">            <p>XPath can be used to return all elements of with specific language</p>
             <pre>//ns:div[@xml:lang="lat"]</pre>
             <ul>
               <li><code>//</code> Selects nodes that match the selection no matter where they are.</li>
@@ -22,31 +177,128 @@
              <li><code>div </code> Selects all div elements.</li>
              <li><code>@xml:lang </code> Specifies the the requirement to have an attribute named xml:lang <i>(language)</i>.</li>
              <li><code>="lat"</code> Specifies language as Latin.</li>
-            </ul>
-          </div>
-          <div class="col-md-4">
-            <h2>Specify date in query</h2>
-            <p>XQuery expression to filter the results by criteria such as date</p>
+            </ul></div>
+      </div>
+    </div>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title">
+          <a data-toggle="collapse" data-parent="#accordion" href="#collapse6">Specify Date</a>
+        </h4>
+      </div>
+      <div id="collapse6" class="panel-collapse collapse">
+        <div class="panel-body">            <p>XQuery expression to filter the results by criteria such as date</p>
             <pre>for $i in //ns:div[@xml:lang="lat"]<br>where $i/ancestor::ns:div//ns:date[@when="1501-10-20"]<br>return $i</pre>
             <ul>
               <li><code>for $i in //ns:div[@xml:lang="lat"]</code> Starts a loop which iterates trough each result from the <i><b>Search for element</b></i> query.</li>
              <li><code>where $i/ancestor::ns:div//ns:date[@when="1501-10-20"]</code> the elements can be filtered by specifing criteria. In this instance the date being "1501-10-20"</li>
              <li><code>return $i</code> if a element matches the date 1501-10-20, it will shown as result on the result page.</li>
-           </ul>
-         </div>
-         <div class="col-md-4">
-            <h2>Specify year ranges</h2>
-            <p>Search through time period by using regular expressions</p>
+           </ul></div>
+      </div>
+    </div>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title">
+          <a data-toggle="collapse" data-parent="#accordion" href="#collapse7">Specify a Date Range</a>
+        </h4>
+      </div>
+      <div id="collapse7" class="panel-collapse collapse">
+        <div class="panel-body">            <p>Search through time period by using regular expressions</p>
             <pre>for $i in //ns:div[@xml:lang="lat"]<br>where matches($i/ancestor::ns:div//ns:date/@when, "1501")<br>return $i</pre>
             <ul>
              <li><code>where matches($i/ancestor::ns:div[1]//ns:date/@when, "1501") </code>
                Simmilar to <i><b>Specify a year in query</b></i> where the results are filtered by only a specific date in this instance the date filtered using regular expression <b>1501</b>.
             </ul>
             <p>An alternative could be</p>
-            <pre>for $i in //ns:div[@xml:lang="lat"]<br>where $i/ancestor::ns:div//ns:date[@when >"1501-1-1"][@when <"1502-12-31"]<br>return $i</pre>
-
-         </div>
-        </div>
+            <pre>for $i in //ns:div[@xml:lang="lat"]<br>where $i/ancestor::ns:div//ns:date[@when >"1501-1-1"][@when <"1502-12-31"]<br>return $i</pre></div>
       </div>
-  <br>
+    </div>
+  </div> 
 </div>
+</div>
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
