@@ -101,7 +101,7 @@ class TranscriptionXml < ApplicationRecord
       entry_html = entry.to_xml
 
       # Split entryID
-      volum, page, paragraph = splitEntryID(entry)
+      volume, page, paragraph = splitEntryID(entry)
       # Overwrite if exists
       if Search.exists?(page: page, volume: volume, paragraph: paragraph)
         s = Search.find_by(entry: entry_id)
