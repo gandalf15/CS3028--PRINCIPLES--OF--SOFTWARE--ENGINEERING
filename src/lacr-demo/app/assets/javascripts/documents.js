@@ -13,8 +13,8 @@ var load_document = function (p, v){
           // Transform language codes
           $(".pr-language").each(function() {
             try {
-              $(this).html(ISO_639_2[$(this).html()]['native'][0]);
-            } catch (e) {console.log(e);}
+              $(this).html(ISO_639_2[$(this).html()].native[0]);
+            } catch (e) {}
           });
 
           // Image zoom on hover
@@ -39,7 +39,7 @@ var load_document = function (p, v){
   $('div.active').removeClass("active");
   $('#vol-'+v+'-page-'+p).addClass("active");
 
-}
+};
 
 $(document).ready(function() {
 
@@ -47,10 +47,10 @@ $(document).ready(function() {
   jqxhr = $.getJSON( "/ajax/doc/list")
       .done(function(data) {
         $.each( data, function( i, e ) {
-            if($('#vol-'+e.volume).length == 0){
+            if($('#vol-'+e.volume).length === 0){
               $('<button id="vol-'+e.volume+'" class="btn btn-primary btn-block" data-toggle="collapse" data-target=".vol-'+e.volume+'">Volume '+e.volume+'</li>').appendTo('#doc_nav');
             }
             $('<div id="vol-'+e.volume+'-page-'+e.page+'" class="vol-'+e.volume+' collapse"><a onclick="load_document(p='+e.page+', v='+e.volume+');">Page '+e.page+'</a></div>').appendTo('#doc_nav');//.appendTo('#vol-'+e.volume);
         });
-      })
+      });
 });
