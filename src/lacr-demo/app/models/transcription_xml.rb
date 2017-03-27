@@ -110,10 +110,6 @@ class TranscriptionXml < ApplicationRecord
       else
         # Create new search record
         s = Search.new
-        s.entry = entry_id
-        s.volume = volume
-        s.page = page
-        s.paragraph = paragraph
         # Create TrParagraph record
         pr = TrParagraph.new
       end
@@ -124,6 +120,10 @@ class TranscriptionXml < ApplicationRecord
       pr.save
 
       # Create Search record
+      s.entry = entry_id
+      s.volume = volume
+      s.page = page
+      s.paragraph = paragraph
       s.tr_paragraph = pr
       s.transcription_xml = self
       s.lang = entry_lang
