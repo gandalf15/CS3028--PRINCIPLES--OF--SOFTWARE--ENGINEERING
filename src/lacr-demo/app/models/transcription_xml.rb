@@ -34,34 +34,34 @@ class TranscriptionXml < ApplicationRecord
     # Remove Processing Instructions. Tags of type <? .. ?>
     doc.xpath('//processing-instruction()').remove
 
-    # # Create empty pages
-    # page_breaks = doc.xpath("//xmlns:pb[@n]", 'xmlns' => HISTEI_NS)
-    # # The volume number is extracted from the xml:id of div
-    # volume = splitEntryID(doc.xpath('//xmlns:div[@xml:id]/@xml:id', 'xmlns' => HISTEI_NS)[0])[0]
-    # page_breaks.each do |pb|
-    #   begin
-    #     # The attribute @n is assumed to be the page number
-    #     page = pb.xpath('@n').to_s.to_i
-    #
-    #     # The note contains information about the page
-    #     # it content is usually "Page is empty."
-    #     if not Search.exists?(page: page, volume: volume, paragraph: 1)
-    #       s = Search.new
-    #       s.volume = volume
-    #       s.page = page
-    #       s.paragraph = 1
-    #       pr = TrParagraph.new
-    #       pr.content_xml = note.to_xml
-    #       pr.content_html = "Page is empty."
-    #       pr.save
-    #       s.tr_paragraph = pr
-    #       s.transcription_xml = self
-    #       s.save
-    #     end
-    #   rescue Exception => e
-    #     logger.error(e)
-    #   end
-    # end
+    # Create empty pages
+    page_breaks = doc.xpath("//xmlns:pb[@n]", 'xmlns' => HISTEI_NS)
+    # The volume number is extracted from the xml:id of div
+    volume = splitEntryID(doc.xpath('//xmlns:div[@xml:id]/@xml:id', 'xmlns' => HISTEI_NS)[0])[0]
+    page_breaks.each do |pb|
+      begin
+        # The attribute @n is assumed to be the page number
+        page = pb.xpath('@n').to_s.to_i
+
+        # The note contains information about the page
+        # it content is usually "Page is empty."
+        if not Search.exists?(page: page, volume: volume, paragraph: 1)
+          pr = TrParagraph.new
+          pr.content_xml = "<note xmlns=\"http://www.tei-c.org/ns/1.0\"/>Page is empty.<note>"
+          pr.content_html = "Page is empty."
+          pr.save
+          s = Search.new
+          s.volume = volume
+          s.page = page
+          s.paragraph = 1
+          s.tr_paragraph = pr
+          s.transcription_xml = self
+          s.save
+        end
+      rescue Exception => e
+        logger.error(e)
+      end
+    end
 
     # Extract all "div" tags with atribute "xml:id"
     entries = doc.xpath("//xmlns:div[@xml:id]", 'xmlns' => HISTEI_NS)
@@ -102,19 +102,15 @@ class TranscriptionXml < ApplicationRecord
       entry_html = entry.to_xml
 
       # Split entryID
-      volum, page, paragraph = splitEntryID(entry)
+      volume, page, paragraph = splitEntryID(entry)
       # Overwrite if exists
       if Search.exists?(page: page, volume: volume, paragraph: paragraph)
-        s = Search.find_by(entry: entry_id)
+        s = Search.find_by(page: page, volume: volume, paragraph: paragraph)
         # Get existing paragraph
         pr = s.tr_paragraph
       else
         # Create new search record
         s = Search.new
-        s.entry = entry_id
-        s.volume = volume
-        s.page = page
-        s.paragraph = paragraph
         # Create TrParagraph record
         pr = TrParagraph.new
       end
@@ -125,6 +121,10 @@ class TranscriptionXml < ApplicationRecord
       pr.save
 
       # Create Search record
+      s.entry = entry_id
+      s.volume = volume
+      s.page = page
+      s.paragraph = paragraph
       s.tr_paragraph = pr
       s.transcription_xml = self
       s.lang = entry_lang
