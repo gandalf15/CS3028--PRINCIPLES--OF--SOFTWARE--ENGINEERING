@@ -165,7 +165,7 @@ class TranscriptionXml < ApplicationRecord
     # Get all entries with page break inside
 
     entries_with_page_break.each do |entry|
-      # begin
+      begin
 
         # Split the string of content by the page break
         xmlContentFirstPart, xmlContentSecondPart = entry.to_s.split(/<.*pb.*\/>/)
@@ -219,35 +219,35 @@ class TranscriptionXml < ApplicationRecord
         textContentSecondPart =(Nokogiri::XML("<p>"+xmlContentSecondPart.gsub('<lb break="yes"/>', "\n")+"</p>")).xpath('normalize-space()')
 
         # Find the original record
-        previusEntry = Search.find_by(entry: oldEntryId)
+        previousEntry = Search.find_by(volume: volume,page: page,paragraph: paragraph)
 
         # Create Search record
         s.tr_paragraph = pr
-        s.entry = previusEntry.entry
+        s.entry = previousEntry.entry
         s.volume = volume
         s.page = newPage
         s.paragraph = 1
         s.transcription_xml = self
-        s.lang = previusEntry.lang
-        s.date = previusEntry.date
-        s.date_incorrect = previusEntry.date_incorrect
+        s.lang = previousEntry.lang
+        s.date = previousEntry.date
+        s.date_incorrect = previousEntry.date_incorrect
         # Replace line-break tag with \n and normalize whitespace
         s.content = "#{textContentSecondPart}\n#{s.content}"
         s.save
 
-        previusEntry.content = textContentFirstPart
+        previousEntry.content = textContentFirstPart
         # Get paragraph record
-        prPreviusEntry = previusEntry.tr_paragraph
+        prPreviusEntry = previousEntry.tr_paragraph
         # Remove duplicated content from entry which contains the page break
         prPreviusEntry.content_xml = xmlContentFirstPart
         prPreviusEntry.content_html = htmlContentFirstPart.to_xml
         prPreviusEntry.save
         # Save the change
-        previusEntry.tr_paragraph = prPreviusEntry
-        previusEntry.save
-      # rescue Exception => e
-      #   logger.error(e)
-      # end
+        previousEntry.tr_paragraph = prPreviusEntry
+        previousEntry.save
+      rescue Exception => e
+        logger.error(e)
+      end
     end
 
   end
