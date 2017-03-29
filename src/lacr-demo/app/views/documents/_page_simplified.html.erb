@@ -9,7 +9,7 @@
 					</div>
           <%end%>
 
-          <%if document.date %>
+          <%if document.date or document.date_incorrect %>
 					<div class="col-sm-4">
 						<strong>Date: </strong><span><% if document.date_incorrect %><%= document.date_incorrect %><% else %><%= document.date %><% end %></span>
 					</div>
