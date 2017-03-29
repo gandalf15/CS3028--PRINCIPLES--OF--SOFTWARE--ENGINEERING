@@ -64,9 +64,9 @@ function load_document (p, v){
         if(statusTxt == "success"){
           // Transform language codes
           $(".pr-language").each(function() {
-            $(this).html(ISO_639_2[$(this).html()]['native'][0]);
+            try { $(this).html(ISO_639_2[$(this).html()].native[0]); }
+            catch (e) {}
           });
-
           // Event listener for add-to-list of selected entries
           init_selected_checkboxes();
         }
@@ -79,7 +79,7 @@ function load_document (p, v){
 
 function Download(url) {
     $('#file_download').attr('src', url);
-};
+}
 
 $(document).ready(function() {
 
@@ -100,32 +100,29 @@ $(document).ready(function() {
       }
       else {
           $.each( data, function( i, e ) {
-              if($('#vol-'+e.volume).length == 0){
-                $('\
-                    <button id="vol-'+e.volume+'" \
-                            data-vol="'+e.volume+'" \
-                            data-collapse-group="volume" \
-                            class="btn btn-primary btn-block" \
-                            onclick="$(\'.vol-'+e.volume+'\').collapse(\'show\');" \
-                            data-target=".vol-'+e.volume+'">\
-                      Volume '+e.volume+' <span id="badge-'+e.volume+'" class="badge"></span>\
-                    </button>').appendTo('#volume');
-                $('\
-                  <a href="#" data-vol="'+e.volume+'" data-page="'+e.page+'" class="vol-'+e.volume+' collapse list-group-item row">\
-                    <label><input type="checkbox" data-vol="'+e.volume+'" data-page="all"> Select all</label>\
-                  </a>').appendTo('#page');
+              if($('#vol-'+e.volume).length === 0){
+                $('<button id="vol-'+e.volume+'"' +
+                            'data-vol="'+e.volume+'"'+
+                            'data-collapse-group="volume"' +
+                            'class="btn btn-primary btn-block"' +
+                            'onclick="$(\'.vol-'+e.volume+'\').collapse(\'show\');"' +
+                            'data-target=".vol-'+e.volume+'">' +
+                      'Volume '+e.volume+' <span id="badge-'+e.volume+'" class="badge"></span>'+
+                    '</button>').appendTo('#volume');
+                $('<a href="#" data-vol="'+e.volume+'" data-page="'+
+                  e.page+'" class="vol-'+e.volume+' collapse list-group-item row">'+
+                    '<label><input type="checkbox" data-vol="'+e.volume+'" data-page="all">'+
+                    ' Select all</label></a>').appendTo('#page');
               }
-              $('\
-                  <a data-vol="'+e.volume+'" \
-                     data-page="'+e.page+'" \
-                     class="vol-'+e.volume+' collapse list-group-item row" \
-                     onclick="$(\'a\').removeClass(\'active\');$(this).addClass(\'active\');load_document(p='+e.page+', v='+e.volume+');">\
-                    <input type="checkbox" \
-                           data-vol="'+e.volume+'" \
-                           data-page="'+e.page+'" \
-                           name="vol-'+e.volume+'-page-'+e.page+'">\
-                      Page '+e.page+' \
-                  </a>').appendTo('#page');
+              $('<a data-vol="'+e.volume+'" '+
+                     'data-page="'+e.page+'" '+
+                     'class="vol-'+e.volume+' collapse list-group-item row" '+
+                     'onclick="$(\'a\').removeClass(\'active\');$(this).addClass(\'active\');load_document(p='+e.page+', v='+e.volume+');">'+
+                    '<input type="checkbox"'+
+                           'data-vol="'+e.volume+'"'+
+                           'data-page="'+e.page+'"'+
+                           'name="vol-'+e.volume+'-page-'+e.page+'">Page '+e.page+
+               '</a>').appendTo('#page');
           });
 
           // Display the page after it has been build
@@ -135,7 +132,7 @@ $(document).ready(function() {
           $("[data-collapse-group='volume']").click(function () {
               var $this = $(this);
               $("[data-collapse-group='volume']").removeClass('active');
-              $(this).addClass('active')
+              $(this).addClass('active');
               $("[data-collapse-group='volume']:not([data-target='" + $this.data("target") + "'])").each(function () {
                   $($(this).data("target")).removeClass("in").addClass('collapse');
               });
@@ -190,16 +187,16 @@ $(document).ready(function() {
             }
 
             // Disable buttons when nothing has been $selected
-            $('.doc-tools').attr("disabled", Object.keys($selected).length == 0);
+            $('.doc-tools').attr("disabled", Object.keys($selected).length === 0);
           });
         }
-    })}
+    });}
 
   //Load the list of volumes and pages using ajax
   ajax_loader();
 
-    $('#doc_download').click(function(){download_zip()});
-    $('#doc_download_img').click(function(){download_zip(img=true)});
+    $('#doc_download').click(function(){download_zip();});
+    $('#doc_download_img').click(function(){download_zip(img=true);});
 
 
     $('#doc_delete').click(function() {

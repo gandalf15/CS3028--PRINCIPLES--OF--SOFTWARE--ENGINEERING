@@ -27,7 +27,7 @@ var init_selected_checkboxes = function (){
         // If on select page remove hide the entry
         if (window.location.pathname == "/doc/selected") { $('#'+entryID).fadeOut(); }
         // Remove the cookie if no selected documents are left
-        if (selected_list.length == 0) {
+        if (selected_list.length === 0) {
           $("#documents-selected-btn").hide();
           $("#documents-btn").show();
           Cookies.remove('selected_entries');
@@ -38,8 +38,8 @@ var init_selected_checkboxes = function (){
   });
 
   // Set to checked add-to-list if it is already in the list
-  $('.add-to-list').each(function () {$(this).prop('checked', selected_list.indexOf($(this).attr("data-entry")) >= 0)});
-}
+  $('.add-to-list').each(function () {$(this).prop('checked', selected_list.indexOf($(this).attr("data-entry")) >= 0);});
+};
 
 /* Adding a parameter to the URL
  * key - name of parameter
@@ -54,7 +54,7 @@ function insertParam(key, value, remove) {
     while(i--)
     {
         x = kvp[i].split('=');
-        if (x[0]==remove) {kvp.splice(i, 1)}
+        if (x[0]==remove) {kvp.splice(i, 1);}
         else if (x[0]==key && !found)
         {
             x[1] = value;
@@ -78,16 +78,16 @@ $(document).ready(function() {
 
   $('#adv-search').submit(function () {
     // Ignore empty values
-    if($('#content').val() == ''){$('#content').attr('value', '*')}
+    if($('#content').val() === ''){$('#content').attr('value', '*');}
 
     $(this).find('[name]').each(function(){
-      if($(this).val() == ''){
+      if($(this).val() === ''){
         $(this).filter(function (input) {
           return !input.value;
         })
         .prop('name', '');
       }
-    })
+    });
 
     // Ignore submit button
     $(this).find('[name="commit"]').filter(function (input) { return !input.value;}).prop('name', '');

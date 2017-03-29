@@ -13,7 +13,7 @@ var page_init = function (){
     // paddingBottom: "50px", // Padding for the footer
     controlArrows: false, // Disable navigation arrows
     verticalCentered: false, // Do not center pages
-    loopHorizontal: false // To prevent unwanted actions
+    loopHorizontal: false, // To prevent unwanted actions
   });
 }
 
